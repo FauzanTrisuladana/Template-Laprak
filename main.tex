@@ -1,0 +1,200 @@
+\documentclass[a4paper,oneside,11pt]{book}
+
+% Package dasar
+\usepackage[utf8]{inputenc}     % untuk karakter UTF-8
+\usepackage[T1]{fontenc}        % encoding font
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{ref.bib}
+
+% Package tambahan untuk layout dan formatting
+\usepackage{geometry}           % untuk margin
+\usepackage{setspace}           % untuk spasi baris
+\usepackage{fancyhdr}           % untuk header/footer
+\usepackage{hyperref}           % untuk link dan bookmark
+\usepackage{listings}           % untuk code Python
+\usepackage{xcolor}             % untuk warna
+\usepackage{float}              % untuk posisi gambar
+\usepackage{tocloft}            % Untuk membuat daftar isi menampilkan "Bab 1. Pendahuluan" instead of "1. Pendahuluan",
+\usepackage{lipsum}             % untuk lorem ipsum
+\usepackage{indentfirst}        % untuk indent paragraf pertama
+
+% Pengaturan layout
+\geometry{left=3cm, right=2cm, top=2cm, bottom=2cm}
+\onehalfspacing  % spasi 1.5
+
+% Format chapter
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\bfseries\centering}{\chaptertitlename\ \thechapter.}{1em}{}
+
+% Format code Python
+\lstset{
+    language=PHP,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    breaklines=true,
+    showstringspaces=false,
+    xleftmargin=2cm,
+    xrightmargin=1cm,
+    morekeywords={Route,Controller,Request,Response,Blade,Model,Migration,Artisan,middleware,Auth,extends,section,yield,csrf,foreach,endif}
+}
+
+% Pengaturan hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,
+    urlcolor=blue,
+    citecolor=red
+}
+
+% Info dokumen
+\title{Laporan Praktikum \\ Praktikum Pemrograman WEB 2\\
+Pertemuan 3\\
+(materi)}
+\author{Nama Mahasiswa: Muhammad Fauzan Putra Trisuladana\\NIM: 24/538699/SV/24524}
+
+\begin{document}
+
+% Title Page
+\begin{titlingpage} 
+\begin{center}
+
+\vspace{4cm} 
+\begin{Large} 
+\textbf{\thetitle} \\
+\end{Large}
+\vspace{2cm}
+
+\includegraphics[height=8cm]{lambang ugm.png}\\ 
+\begin{large}
+\vspace{2cm} 
+\theauthor\\
+Kelas: A1 \\ 
+\end{large}
+\begin{large}
+Dosen Pengampu: Dinar Nugroho Pratomo, S.Kom., M.IM., M.Cs.\\
+\end{large}
+
+\vspace{2cm}
+\begin{Large}
+\textbf{Sekolah Vokasi}\\
+\textbf{Universitas Gadjah Mada}\\
+\textbf{Yogyakarta}\\
+\textbf{2025}\\
+\end{Large}
+
+\end{center}
+\end{titlingpage}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}            % kosongkan header/footer default
+\fancyfoot[C]{\thepage} % taruh nomor halaman di footer tengah
+
+
+% --- Styling Judul Daftar Isi, Gambar, dan Kode ---
+\renewcommand{\cfttoctitlefont}{\hfill\normalfont\LARGE\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftbeforetoctitleskip}{1em}
+\renewcommand{\cftaftertoctitleskip}{1.5em}
+
+% --- Format Bab di Daftar Isi ---
+\renewcommand{\cftchappresnum}{Bab~}
+\renewcommand{\cftchapaftersnum}{.}
+\renewcommand{\cftchapnumwidth}{3.5em}
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftchappagefont}{\bfseries}
+
+% --- Spasi dan Estetika ---
+\setlength{\cftbeforechapskip}{0.8em} % jarak antar bab
+\setlength{\cftbeforesecskip}{0.2em}  % jarak antar subbab
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsubsecfont}{\normalfont}
+
+% --- Judul Lokal ---
+\renewcommand{\contentsname}{\centering Daftar Isi}
+\renewcommand{\listfigurename}{\centering Daftar Gambar}
+\renewcommand{\lstlistlistingname}{\centering Daftar Kode}
+
+% --- Gaya Daftar Gambar dan Daftar Kode ---
+\renewcommand{\cftloftitlefont}{\hfill\normalfont\LARGE\bfseries}
+\renewcommand{\cftafterloftitle}{\hfill}
+
+\tableofcontents
+
+\newpage
+% Daftar Gambar
+\listoffigures
+
+\newpage
+% Daftar Listing
+\lstlistoflistings
+
+\newpage
+
+% BAB 1: PENDAHULUAN
+\chapter{Pendahuluan}
+
+\section{Latar Belakang}
+
+\section{Tujuan Praktikum}
+\begin{enumerate}
+  \item item 1
+  \item item 2
+  \item item 3
+\end{enumerate}
+
+% BAB 2: DASAR TEORI
+\chapter{Dasar Teori}
+% \indent Seperti yang terlihat di gambar \ref{fig:komputer}, komputer merupakan alat yang dapat mengeksekusi algoritma dengan cepat dan akurat.
+
+% \begin{figure}[htbp]
+% \centering
+% \includegraphics[height=4cm]{komputer.jpg}
+% \caption{Ilustrasi Komputer Modern untuk Pemrograman}
+% \label{fig:komputer}
+% \end{figure}
+
+% BAB 3: HASIL DAN PEMBAHASAN
+\chapter{Hasil dan Pembahasan}
+\begin{lstlisting}
+% Kode
+\end{lstlisting}
+
+% \begin{lstlisting}
+% # Program Hello World sederhana
+% print("Hello World!")
+% print("Selamat datang di dunia Python")
+
+% # Program interaktif dengan user
+% nama = input("Masukkan nama Anda: ")
+% print(f"Halo {nama}, selamat belajar Python!")
+% \end{lstlisting}
+
+% BAB 4: KESIMPULAN DAN SARAN
+\chapter{Kesimpulan dan Saran}
+
+\section{Ringkasan Temuan Utama}
+
+\section{Menjawab Tujuan}
+
+\section{Implikasi Praktis}
+
+\section{Keterbatasan}
+
+\section{Saran Pengembangan Lanjutan}
+
+\section{Penutup}
+
+% Referensi/Daftar Pustaka
+\printbibliography[title={Daftar Pustaka}]
+
+\end{document}
