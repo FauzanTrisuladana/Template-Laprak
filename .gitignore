@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# Except these files and folder
+!main.tex
+!ref.bib
+!resource/
+!resource/**
