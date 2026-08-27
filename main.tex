@@ -7,7 +7,6 @@
 \usepackage{titling}
 \usepackage{titlesec}
 \usepackage[backend=biber,style=ieee]{biblatex}
-\addbibresource{ref.bib}
 
 % Package tambahan untuk layout dan formatting
 \usepackage{geometry}           % untuk margin
@@ -20,31 +19,60 @@
 \usepackage{tocloft}            % Untuk membuat daftar isi menampilkan "Bab 1. Pendahuluan" instead of "1. Pendahuluan",
 \usepackage{lipsum}             % untuk lorem ipsum
 \usepackage{indentfirst}        % untuk indent paragraf pertama
+\usepackage{enumitem}           % untuk kustomisasi penomoran list (A., B., dst)
 
 % Pengaturan layout
 \geometry{left=3cm, right=2cm, top=2cm, bottom=2cm}
 \onehalfspacing  % spasi 1.5
+
+% Penomoran section dengan huruf kapital (A, B, C, ...)
+\renewcommand{\thesection}{\Alph{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+% Penomoran figure mengikuti section (misal, Gambar A.1, A.2, ...)
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\makeatletter
+\@addtoreset{figure}{section}
+\makeatother
 
 % Format chapter
 \titleformat{\chapter}[hang]
   {\normalfont\huge\bfseries\centering}{\chaptertitlename\ \thechapter.}{1em}{}
 
 % Format code Python
-\lstset{
-    language=PHP,
-    basicstyle=\ttfamily\small,
-    keywordstyle=\color{blue}\bfseries,
-    commentstyle=\color{gray},
-    stringstyle=\color{red},
-    numbers=left,
-    numberstyle=\tiny,
-    frame=single,
-    breaklines=true,
-    showstringspaces=false,
-    xleftmargin=2cm,
-    xrightmargin=1cm,
-    morekeywords={Route,Controller,Request,Response,Blade,Model,Migration,Artisan,middleware,Auth,extends,section,yield,csrf,foreach,endif}
+% --- VS Code-like code style (dark) ---
+\definecolor{vscodeBg}{HTML}{1E1E1E}
+\definecolor{vscodeFg}{HTML}{D4D4D4}
+\definecolor{vscodeKeyword}{HTML}{569CD6}
+\definecolor{vscodeString}{HTML}{CE9178}
+\definecolor{vscodeComment}{HTML}{6A9955}
+\definecolor{vscodeNumber}{HTML}{858585}
+\definecolor{vscodeRule}{HTML}{3C3C3C}
+
+\lstdefinestyle{vscode-dark}{
+  language=PHP,
+  basicstyle=\ttfamily\small\color{vscodeFg},
+  backgroundcolor=\color{vscodeBg},
+  keywordstyle=\color{vscodeKeyword}\bfseries,
+  commentstyle=\color{vscodeComment},
+  stringstyle=\color{vscodeString},
+  numbers=left,
+  numberstyle=\tiny\color{vscodeNumber},
+  frame=single,
+  rulecolor=\color{vscodeRule},
+  breaklines=true,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  tabsize=2,
+  xleftmargin=2cm,
+  xrightmargin=1cm,
+  captionpos=b,
+  morekeywords={Route,Controller,Request,Response,Blade,Model,Migration,Artisan,middleware,Auth,extends,section,yield,csrf,foreach,endif}
 }
+
+\lstset{style=vscode-dark}
 
 % Pengaturan hyperref
 \hypersetup{
@@ -56,12 +84,22 @@
 }
 
 % Info dokumen
-\title{Laporan Praktikum \\ Praktikum Pemrograman WEB 2\\
-Pertemuan 3\\
-(materi)}
-\author{Nama Mahasiswa: Muhammad Fauzan Putra Trisuladana\\NIM: 24/538699/SV/24524}
+\newcommand{\Pertemuan}{3}
+\newcommand{\Materi}{Pengenalan Android Studio}
+\title{Laporan Praktikum \\ Pemrograman Perangkat Bergerak\\
+Pertemuan \Pertemuan\\
+\Materi}
+\newcommand{\NamaMahasiswa}{Nama Mahasiswa}
+\newcommand{\NIMMahasiswa}{NIM Mahasiswa}
+\newcommand{\KelasMahasiswa}{Kelas Mahasiswa}
+\newcommand{\DosenPengampu}{Dr. Irkham Huda, S.Kom., M.Cs.}
+
+\author{\NamaMahasiswa\\\NIMMahasiswa}
 
 \begin{document}
+
+% Jika ingin daftar pustaka muncul meskipun belum ada entri di ref.bib,
+% tambahkan entri BibTeX ke file ref.bib terlebih dulu.
 
 % Title Page
 \begin{titlingpage} 
@@ -73,22 +111,30 @@ Pertemuan 3\\
 \end{Large}
 \vspace{2cm}
 
-\includegraphics[height=8cm]{lambang ugm.png}\\ 
+\includegraphics[height=8cm]{resource/lambang ugm.png}\\ 
+\vspace{2cm}
+
+\textbf{Disusun oleh:}\\[0.8em]
+\begin{minipage}{0.8\textwidth}
+\raggedright
 \begin{large}
-\vspace{2cm} 
-\theauthor\\
-Kelas: A1 \\ 
+\begin{tabular}{@{}l@{\hspace{1.5em}}c@{\hspace{1.5em}}p{\textwidth}@{}}
+Nama & : & \NamaMahasiswa \\
+NIM & : & \NIMMahasiswa \\
+Kelas & : & \KelasMahasiswa \\
+Dosen Pengampu & : & \DosenPengampu \\
+\end{tabular}
 \end{large}
-\begin{large}
-Dosen Pengampu: Dinar Nugroho Pratomo, S.Kom., M.IM., M.Cs.\\
-\end{large}
+\end{minipage}
 
 \vspace{2cm}
 \begin{Large}
+\textbf{Program Studi D-IV Teknologi Rekayasa Perangkat Lunak} \\
+\textbf{Departemen Teknik Elektro dan Informatika} \\
 \textbf{Sekolah Vokasi}\\
 \textbf{Universitas Gadjah Mada}\\
 \textbf{Yogyakarta}\\
-\textbf{2025}\\
+\textbf{2026}\\
 \end{Large}
 
 \end{center}
@@ -97,7 +143,17 @@ Dosen Pengampu: Dinar Nugroho Pratomo, S.Kom., M.IM., M.Cs.\\
 % Header/Footer
 \pagestyle{fancy}
 \fancyhf{}            % kosongkan header/footer default
+\renewcommand{\headrulewidth}{0pt} % hilangkan garis header (atas)
+\renewcommand{\footrulewidth}{0pt} % pastikan tidak ada garis footer
 \fancyfoot[C]{\thepage} % taruh nomor halaman di footer tengah
+
+% Pastikan halaman dengan style 'plain' (mis. ToC/List) juga tanpa garis atas
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[C]{\thepage}
+}
 
 
 % --- Styling Judul Daftar Isi, Gambar, dan Kode ---
@@ -138,53 +194,37 @@ Dosen Pengampu: Dinar Nugroho Pratomo, S.Kom., M.IM., M.Cs.\\
 % Daftar Listing
 \lstlistoflistings
 
+% --- Halaman Laporan Pertemuan (seperti contoh gambar) ---
+% Tidak pakai \chapter agar bisa menyatu dengan halaman sebelumnya.
 \newpage
-
-% BAB 1: PENDAHULUAN
-\chapter{Pendahuluan}
-
-\section{Latar Belakang}
+\begin{center}
+\textbf{\LARGE Pertemuan \Pertemuan\\
+{[{\Materi}]}}
+\end{center}
 
 \section{Tujuan Praktikum}
 \begin{enumerate}
-  \item item 1
-  \item item 2
-  \item item 3
+    \item 
+    \item 
 \end{enumerate}
 
-% BAB 2: DASAR TEORI
-\chapter{Dasar Teori}
-% \indent Seperti yang terlihat di gambar \ref{fig:komputer}, komputer merupakan alat yang dapat mengeksekusi algoritma dengan cepat dan akurat.
-
-% \begin{figure}[htbp]
-% \centering
-% \includegraphics[height=4cm]{komputer.jpg}
-% \caption{Ilustrasi Komputer Modern untuk Pemrograman}
-% \label{fig:komputer}
+%contoh gambar dan kode
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{resource/contoh-gambar.png}
+%     \caption{Contoh Gambar}
+%     \label{fig:contoh-gambar}
 % \end{figure}
 
-% BAB 3: HASIL DAN PEMBAHASAN
-\chapter{Hasil dan Pembahasan}
-% \begin{lstlisting}[caption={Contoh Kode Python Sederhana}, label={lst:contoh-kode}, captionpos=b]
-% % Kode
+% \begin{lstlisting}[language=php, caption={Contoh Kode Python}, label={lst:contoh-kode}]
+% def hello_world():
+%     print("Hello, World!")
 % \end{lstlisting}
 
-% BAB 4: KESIMPULAN DAN SARAN
-\chapter{Kesimpulan dan Saran}
+\section{Hasil dan Pembahasan}
+\subsection{Persiapan Praktikum}
+\subsection{Hasil}
 
-\section{Ringkasan Temuan Utama}
-
-\section{Menjawab Tujuan}
-
-\section{Implikasi Praktis}
-
-\section{Keterbatasan}
-
-\section{Saran Pengembangan Lanjutan}
-
-\section{Penutup}
-
-% Referensi/Daftar Pustaka
-\printbibliography[title={Daftar Pustaka}]
+\section{Kesimpulan}
 
 \end{document}
